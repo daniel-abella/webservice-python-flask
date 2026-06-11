@@ -1,0 +1,38 @@
+{
+  "info": {
+    "name": "Exemplo1 - Listar Produtos",
+    "_postman_id": "b2c3d4e5-f6a7-8901-bcde-f23456789012",
+    "description": "Exemplo simples de GET para listar produtos com Flask",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Listar produtos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/produtos",
+          "host": ["{{base_url}}"],
+          "path": ["produtos"]
+        },
+        "description": "Retorna a lista de produtos cadastrados."
+      },
+      "response": [
+        {
+          "name": "200 OK - Lista de produtos",
+          "status": "OK",
+          "code": 200,
+          "body": "[\n  {\"id\": 1, \"nome\": \"Notebook\", \"preco\": 3500.0},\n  {\"id\": 2, \"nome\": \"Mouse\",    \"preco\": 80.0},\n  {\"id\": 3, \"nome\": \"Teclado\",  \"preco\": 150.0}\n]"
+        }
+      ]
+    }
+  ]
+}

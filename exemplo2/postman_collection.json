@@ -1,0 +1,174 @@
+{
+  "info": {
+    "name": "CRUD Produtos - Flask",
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "description": "Collection para o webservice de CRUD de Produtos em Flask",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Listar todos os produtos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/produtos",
+          "host": ["{{base_url}}"],
+          "path": ["produtos"]
+        },
+        "description": "Retorna a lista completa de produtos cadastrados."
+      },
+      "response": [
+        {
+          "name": "200 OK - Lista de produtos",
+          "status": "OK",
+          "code": 200,
+          "body": "[\n  {\"id\": 1, \"nome\": \"Notebook\", \"preco\": 3500.0, \"quantidade\": 10},\n  {\"id\": 2, \"nome\": \"Mouse\",    \"preco\": 80.0,   \"quantidade\": 50},\n  {\"id\": 3, \"nome\": \"Teclado\",  \"preco\": 150.0,  \"quantidade\": 30}\n]"
+        }
+      ]
+    },
+    {
+      "name": "Buscar produto por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/produtos/1",
+          "host": ["{{base_url}}"],
+          "path": ["produtos", "1"]
+        },
+        "description": "Busca um produto específico pelo seu ID."
+      },
+      "response": [
+        {
+          "name": "200 OK - Produto encontrado",
+          "status": "OK",
+          "code": 200,
+          "body": "{\"id\": 1, \"nome\": \"Notebook\", \"preco\": 3500.0, \"quantidade\": 10}"
+        },
+        {
+          "name": "404 Not Found - Produto não encontrado",
+          "status": "Not Found",
+          "code": 404,
+          "body": "{\"erro\": \"Produto não encontrado\"}"
+        }
+      ]
+    },
+    {
+      "name": "Criar novo produto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Monitor\",\n  \"preco\": 1200.00,\n  \"quantidade\": 15\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/produtos",
+          "host": ["{{base_url}}"],
+          "path": ["produtos"]
+        },
+        "description": "Cria um novo produto. Campos obrigatórios: nome, preco, quantidade."
+      },
+      "response": [
+        {
+          "name": "201 Created - Produto criado",
+          "status": "Created",
+          "code": 201,
+          "body": "{\"id\": 4, \"nome\": \"Monitor\", \"preco\": 1200.0, \"quantidade\": 15}"
+        },
+        {
+          "name": "400 Bad Request - Campo ausente",
+          "status": "Bad Request",
+          "code": 400,
+          "body": "{\"erro\": \"Campo obrigatório ausente: nome\"}"
+        }
+      ]
+    },
+    {
+      "name": "Atualizar produto",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"preco\": 3200.00,\n  \"quantidade\": 8\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/produtos/1",
+          "host": ["{{base_url}}"],
+          "path": ["produtos", "1"]
+        },
+        "description": "Atualiza parcialmente um produto existente. Pode enviar um ou mais campos: nome, preco, quantidade."
+      },
+      "response": [
+        {
+          "name": "200 OK - Produto atualizado",
+          "status": "OK",
+          "code": 200,
+          "body": "{\"id\": 1, \"nome\": \"Notebook\", \"preco\": 3200.0, \"quantidade\": 8}"
+        },
+        {
+          "name": "404 Not Found - Produto não encontrado",
+          "status": "Not Found",
+          "code": 404,
+          "body": "{\"erro\": \"Produto não encontrado\"}"
+        }
+      ]
+    },
+    {
+      "name": "Deletar produto",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/produtos/1",
+          "host": ["{{base_url}}"],
+          "path": ["produtos", "1"]
+        },
+        "description": "Remove um produto pelo seu ID."
+      },
+      "response": [
+        {
+          "name": "200 OK - Produto removido",
+          "status": "OK",
+          "code": 200,
+          "body": "{\"mensagem\": \"Produto 1 removido com sucesso\"}"
+        },
+        {
+          "name": "404 Not Found - Produto não encontrado",
+          "status": "Not Found",
+          "code": 404,
+          "body": "{\"erro\": \"Produto não encontrado\"}"
+        }
+      ]
+    }
+  ]
+}
