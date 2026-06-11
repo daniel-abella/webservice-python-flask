@@ -6,8 +6,8 @@ app = Flask(__name__)
 # Configurações do banco de dados
 DB_HOST = "localhost"
 DB_USER = "root"
-DB_SENHA = ""
-DB_NOME = "loja"
+DB_SENHA = "Unifacisa12!"
+DB_NOME = "loja_cauca"
 
 
 def get_connection():
@@ -46,7 +46,8 @@ def obter_produto(id):
         return jsonify({"erro": "Falha na conexão com o banco de dados"}), 500
 
     sql = "SELECT id, nome, preco, quantidade FROM produtos WHERE id = %s"
-    rows = listarBancoDados(conn, sql, (id,))
+    dados = [id]
+    rows = listarBancoDados(conn, sql, dados)
     encerrarConexao(conn)
 
     if not rows:
@@ -60,7 +61,7 @@ def obter_produto(id):
 def criar_produto():
     dados = request.get_json()
 
-    if not dados:
+    if not isinstance(dados, dict):
         return jsonify({"erro": "Corpo da requisição inválido"}), 400
 
     campos_obrigatorios = ["nome", "preco", "quantidade"]
@@ -73,7 +74,8 @@ def criar_produto():
         return jsonify({"erro": "Falha na conexão com o banco de dados"}), 500
 
     sql = "INSERT INTO produtos (nome, preco, quantidade) VALUES (%s, %s, %s)"
-    novo_id = insertNoBancoDados(conn, sql, (dados["nome"], dados["preco"], dados["quantidade"]))
+    valores = (dados["nome"], dados["preco"], dados["quantidade"])
+    novo_id = insertNoBancoDados(conn, sql, valores)
     encerrarConexao(conn)
 
     if novo_id is None:
