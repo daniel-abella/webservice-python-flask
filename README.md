@@ -35,6 +35,9 @@ webservice-python/
 │   ├── exemplo2-v1.py        # Versão 1 — CRUD básico
 │   ├── exemplo2-v2.py        # Versão 2 — CRUD com validações
 │   └── requirements.txt      # Dependências do exemplo 2
+├── exemplo3/
+│   ├── exemplo3-v1.py        # CRUD com documentação Swagger via Flasgger
+│   └── requirements.txt      # Dependências do exemplo 3
 └── README.md
 ```
 
@@ -42,6 +45,7 @@ webservice-python/
 |---|---|
 | `exemplo1-v2.py` | API com um único endpoint `GET /produtos` |
 | `exemplo2-v2.py` | API completa com `GET`, `POST`, `PUT` e `DELETE` |
+| `exemplo3-v1.py` | API CRUD com interface Swagger gerada pelo Flasgger |
 
 ---
 
@@ -100,6 +104,11 @@ pip3 install -r exemplo1/requirements.txt
 pip3 install -r exemplo2/requirements.txt
 ```
 
+**Exemplo 3:**
+```bash
+pip3 install -r exemplo3/requirements.txt
+```
+
 ---
 
 ## Como executar
@@ -116,6 +125,12 @@ python exemplo1-v2.py
 ```bash
 cd exemplo2
 python exemplo2-v2.py
+```
+
+**Exemplo 3 (CRUD com Flasgger/Swagger):**
+```bash
+cd exemplo3
+python exemplo3-v1.py
 ```
 
 O terminal exibirá uma mensagem semelhante a:
@@ -147,6 +162,16 @@ Para encerrar o servidor, pressione `Ctrl + C` no terminal.
 | POST | `/produtos` | Cria um novo produto |
 | PUT | `/produtos/<id>` | Atualiza um produto existente |
 | DELETE | `/produtos/<id>` | Remove um produto |
+
+### Exemplo 3
+
+O `exemplo3` expõe os mesmos endpoints do exemplo 2, mas com documentação
+interativa gerada automaticamente:
+
+| Recurso | URL | Descrição |
+|--------|-----|-----------|
+| Swagger UI | `/apidocs/` | Interface web para visualizar e testar a API |
+| Especificação OpenAPI | `/apispec_1.json` | JSON da documentação gerada pelo Flasgger |
 
 ---
 
@@ -187,6 +212,20 @@ curl -X DELETE http://127.0.0.1:5000/produtos/2
 
 Importe o arquivo `postman_collection.json` de cada exemplo diretamente no [Postman](https://www.postman.com/) para ter todas as requisições já configuradas.
 
+### Pelo Swagger (Flasgger)
+
+Depois de executar o `exemplo3`, abra no navegador:
+
+```text
+http://127.0.0.1:5000/apidocs/
+```
+
+Nessa tela você poderá:
+
+- visualizar todos os endpoints documentados;
+- ver exemplos de parâmetros e respostas;
+- testar requisições direto pelo navegador.
+
 ---
 
 ## Dependências
@@ -194,6 +233,7 @@ Importe o arquivo `postman_collection.json` de cada exemplo diretamente no [Post
 | Pacote | Versão | Para que serve |
 |--------|--------|----------------|
 | [Flask](https://flask.palletsprojects.com/) | última estável | Framework web que cria o servidor HTTP e gerencia as rotas |
+| [Flasgger](https://github.com/flasgger/flasgger) | última estável | Gera documentação Swagger/OpenAPI para aplicações Flask |
 
 ---
 
