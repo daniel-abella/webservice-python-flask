@@ -38,6 +38,20 @@ webservice-python/
 ├── exemplo3/
 │   ├── exemplo3-v1.py        # CRUD com documentação Swagger via Flasgger
 │   └── requirements.txt      # Dependências do exemplo 3
+├── exemplo4/
+│   ├── exemplo4-v1.py        # CRUD em memória
+│   ├── exemplo4-v2.py        # CRUD com MySQL
+│   ├── data.sql              # Script de criação da base
+│   ├── postman_collection.json
+│   └── requirements.txt
+├── exemplo5/
+│   ├── exemplo5-v1.py        # CRUD em memória
+│   ├── exemplo5-v2.py        # CRUD com MySQL
+│   ├── data.sql              # Script de criação da base
+│   ├── postman_collection.json
+│   └── requirements.txt
+├── docs/
+│   └── explicacao-api-rest.pdf
 └── README.md
 ```
 
@@ -46,6 +60,8 @@ webservice-python/
 | `exemplo1-v2.py` | API com um único endpoint `GET /produtos` |
 | `exemplo2-v2.py` | API completa com `GET`, `POST`, `PUT` e `DELETE` |
 | `exemplo3-v1.py` | API CRUD com interface Swagger gerada pelo Flasgger |
+| `exemplo4-v2.py` | API CRUD integrada ao MySQL |
+| `exemplo5-v2.py` | Segunda variação de API CRUD integrada ao MySQL |
 
 ---
 
@@ -109,6 +125,16 @@ pip3 install -r exemplo2/requirements.txt
 pip3 install -r exemplo3/requirements.txt
 ```
 
+**Exemplo 4:**
+```bash
+pip3 install -r exemplo4/requirements.txt
+```
+
+**Exemplo 5:**
+```bash
+pip3 install -r exemplo5/requirements.txt
+```
+
 ---
 
 ## Como executar
@@ -131,6 +157,18 @@ python exemplo2-v2.py
 ```bash
 cd exemplo3
 python exemplo3-v1.py
+```
+
+**Exemplo 4 (CRUD com MySQL):**
+```bash
+cd exemplo4
+python exemplo4-v2.py
+```
+
+**Exemplo 5 (CRUD com MySQL):**
+```bash
+cd exemplo5
+python exemplo5-v2.py
 ```
 
 O terminal exibirá uma mensagem semelhante a:
@@ -172,6 +210,13 @@ interativa gerada automaticamente:
 |--------|-----|-----------|
 | Swagger UI | `/apidocs/` | Interface web para visualizar e testar a API |
 | Especificação OpenAPI | `/apispec_1.json` | JSON da documentação gerada pelo Flasgger |
+
+### Exemplos 4 e 5
+
+Os `exemplo4` e `exemplo5` expõem os mesmos endpoints CRUD de produtos, com duas variações:
+
+- `v1`: dados em memória.
+- `v2`: persistência em MySQL usando o script `data.sql`.
 
 ---
 
@@ -234,6 +279,7 @@ Nessa tela você poderá:
 |--------|--------|----------------|
 | [Flask](https://flask.palletsprojects.com/) | última estável | Framework web que cria o servidor HTTP e gerencia as rotas |
 | [Flasgger](https://github.com/flasgger/flasgger) | última estável | Gera documentação Swagger/OpenAPI para aplicações Flask |
+| [mysql-connector-python](https://pypi.org/project/mysql-connector-python/) | última estável | Conecta as APIs dos exemplos 4 e 5 ao MySQL |
 
 ---
 
